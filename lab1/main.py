@@ -36,7 +36,7 @@ def lab1():
     # Градиентный спуск
     weights = np.random.uniform(-1, 1, 9)
     learning_rate = 0.01
-    epochs = 100
+    epochs = 1000
 
     for epoch in range(epochs):
         # Forward pass: предсказания для всех примеров
@@ -64,7 +64,7 @@ def lab1():
         if round(predictions[i]) == y_true[i]:
             corrent_item += 1
 
-    print((corrent_item / items_count) * 100)
+    print(f"% Правильных предсказаний: {(corrent_item / items_count) * 100}")
 
 
 
