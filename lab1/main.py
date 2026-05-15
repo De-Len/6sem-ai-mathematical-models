@@ -37,10 +37,11 @@ def lab1():
     weights = np.random.uniform(-1, 1, 9)
     learning_rate = 0.01
     epochs = 1000
+    bias = -3
 
     for epoch in range(epochs):
         # Forward pass: предсказания для всех примеров
-        predictions = np.array([inference_one_neuron(x, weights, 1) for x in X])
+        predictions = np.array([inference_one_neuron(x, weights, bias) for x in X])
 
         # MSE loss
         loss = mean_squared_error(y_true, predictions)
@@ -57,16 +58,21 @@ def lab1():
     print(f"\nФинальные веса: {weights}")
     print(f"Финальная MSE: {loss:.6f}")
 
-    predictions = np.array([inference_one_neuron(x, weights, 1) for x in X])
+    predictions = np.array([inference_one_neuron(x, weights, bias) for x in X])
     items_count = len(predictions)
-    corrent_item = 0
+    correct_item = 0
     for i in range(items_count):
-        if round(predictions[i]) == y_true[i]:
-            corrent_item += 1
+        # print(f"Предсказано: {round(predictions[i])}")
+        # print(f"Правильно: {y_true[i]}")
 
-    print(f"% Правильных предсказаний: {(corrent_item / items_count) * 100}")
+        # if round(predictions[i]) == y_true[i]:
+        #     correct_item += 1
+        if (round(predictions[i]) > 0) and (y_true[i] > 0):
+            correct_item += 1
+        elif (round(predictions[i]) == 0) and (y_true[i] == 0):
+            correct_item += 1
 
-
+    print(f"% Правильных предсказаний: {(correct_item / items_count) * 100}")
 
 
 if __name__ == "__main__":
